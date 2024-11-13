@@ -1,7 +1,7 @@
 # GitHub Actions Demo
 
 ## 目的
-使用GitHub Actions實現爬蟲的自動化，排程讓GitHub Actions定期爬取噗浪(Plurk)偷偷說，產生html檔於`github-actions-demo\crawling_data`目錄底下，並於生成後自動提交至repository。
+使用GitHub Actions實現數據抓取與提交的自動化，排程讓GitHub Actions定期獲取噗浪(Plurk)偷偷說，產生html檔於`github-actions-demo\crawling_data`目錄底下，並於生成後自動提交至repository。
 
 ## 結構
 - 專案構建工具: Maven
@@ -9,9 +9,9 @@
 - ``.github\workflows``下的yml
   - 參考文件: [GitHub Actions documentation](https://docs.github.com/en/actions)
     - ``github-actions-demo.yml``: GitHub官方文件提供的Quickstart模板
-    - ``crawler-demo.yml``: 爬蟲Plurk偷偷說的workflow
+    - ``crawler-demo.yml``: 抓取Plurk偷偷說的workflow
 - ``org.example.MyCrawler``
-  - 主要的爬蟲程式，main方法入口
+  - 主功能程式，main方法入口
   - 使用``java.net.http``的HttpClient發送API請求與接收回傳資料
   - 將資料從json格式轉換為``org.example.pojo.Plurk``與``org.example.pojo.Response``再進行處理
 - ``org.example.HtmlConverter``
