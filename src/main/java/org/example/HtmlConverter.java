@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ public class HtmlConverter {
         StringBuilder htmlContent = new StringBuilder();
 
         //開始 HTML 文件
-        htmlContent.append("<html><head><title>Plurks</title></head><body>");
+        htmlContent.append("<html><head><meta charset=\"UTF-8\"><title>Plurks</title></head><body>");
         htmlContent.append("<h1>Plurk List</h1>");
         htmlContent.append("<table border='1'>");
         htmlContent.append("<tr><th>Plurk ID</th><th>Posted</th><th>Content</th><th>Responses</th><th>Favorite Count</th></tr>");
@@ -73,7 +74,7 @@ public class HtmlConverter {
         File file = new File(folderPath + File.separator + fileName);
 
         //寫入 HTML 內容到檔案
-        try (FileWriter writer = new FileWriter(file)) {
+        try (FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8)) {
             writer.write(htmlContent);
             System.out.println("HTML 檔案已儲存到: " + file.getAbsolutePath());
         } catch (IOException e) {
