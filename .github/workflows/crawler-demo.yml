@@ -27,5 +27,5 @@ jobs:
            git config --global user.name "hchlydia"
            git config --global user.email "hch34242@gmail.com"
            git add . && git commit -m "daily crawl"
-           git push origin main
+           git push https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/hchlydia/github-actions-demo.git
       - run: echo 'Job finished'
