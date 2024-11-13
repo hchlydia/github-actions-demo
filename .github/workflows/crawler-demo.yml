@@ -18,6 +18,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven #cache dependencies
+      - name: Set UTF-8 encoding
+        run: echo "JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8" >> $GITHUB_ENV
       - name: Build project with maven and wrap dependencies
         run: mvn package
       - name: Run MyCrawler.java
