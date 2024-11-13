@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MyCrawler {
 
-    private static final String PLURK_ARTICLE_URL = "https://www.plurk.com/Stats/getAnonymousPlurks?lang=zh";
+    private static final String PLURK_ARTICLE_URL = "https://www.plurk.com/Stats/getAnonymousPlurks?lang=zh&offset=0&limit=200";
     private static final String PLURK_RESPONSE_URL = "https://www.plurk.com/Responses/get";
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -67,6 +67,7 @@ public class MyCrawler {
         for (JsonNode pid : pids) {
             String pidStr = pid.asText();
             JsonNode node = rootNode.path(pidStr);
+            //convert to Plurk
             Plurk plurk = mapper.readValue(node.toString(), Plurk.class);
 
             //get response
@@ -82,12 +83,13 @@ public class MyCrawler {
     }
 
     private static List<Response> getResponses(String pid, HttpClient httpClient) {
-        String plurkId = URLEncoder.encode(pid, StandardCharsets.UTF_8);
-        String fromResponseid = URLEncoder.encode("0", StandardCharsets.UTF_8);
-        String requestParam = "plurk_id=" + plurkId + "&from_response_id=" + fromResponseid;
+//        String plurkId = URLEncoder.encode(pid, StandardCharsets.UTF_8);
+//        String fromResponseid = URLEncoder.encode("0", StandardCharsets.UTF_8);
+        String requestParam = "plurk_id=" + pid + "&from_response_id=" + "0";
 
         List<Response> responses = new ArrayList<>();
         try {
+            //create request
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(PLURK_RESPONSE_URL))
                     .version(HttpClient.Version.HTTP_2)
@@ -97,6 +99,7 @@ public class MyCrawler {
                     .timeout(Duration.ofSeconds(5))
                     .build();
 
+            //send request
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == HttpStatus.SC_OK) {
