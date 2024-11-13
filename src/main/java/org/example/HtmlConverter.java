@@ -60,7 +60,7 @@ public class HtmlConverter {
     public static void saveHtmlToFile(List<Plurk> plurks) throws IOException {
         String fileName = formatter.format(new Date()) + ".html";
         String htmlContent = generateHtmlContent(plurks);
-        String folderPath = "crawling_data";
+        String folderPath = new File(System.getProperty("user.dir")).getParent() + File.separator + "crawling_data";
 
         //建立資料夾（如果它不存在）
         File folder = new File(folderPath);
