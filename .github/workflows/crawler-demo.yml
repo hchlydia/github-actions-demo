@@ -21,7 +21,7 @@ jobs:
       - name: Set UTF-8 encoding
         run: echo 'JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8' >> $GITHUB_ENV
       - name: Build project with maven and wrap dependencies
-        run: mvn package
+        run: mvn --batch-mode package '-Dfile.encoding=UTF-8' '-Dproject.build.sourceEncoding=UTF-8'
       - name: Run MyCrawler.java
         run: java -jar target/my-crawler-1.0-SNAPSHOT-jar-with-dependencies.jar
       - name: Commit Data Back To GitHub Repo
