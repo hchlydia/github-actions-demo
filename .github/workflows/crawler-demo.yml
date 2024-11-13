@@ -21,7 +21,7 @@ jobs:
       - name: Build project with maven and wrap dependencies
         run: mvn package
       - name: Run MyCrawler.java
-        run: java -jar target/my-crawler-1.0-SNAPSHOT-jar-with-dependencies.jar
+        run: java -Dfile.encoding=UTF-8 -jar target/my-crawler-1.0-SNAPSHOT-jar-with-dependencies.jar
       - name: Commit Data Back To GitHub Repo
         run: |
            git config --global user.name "hchlydia"
